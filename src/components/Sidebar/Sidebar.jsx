@@ -12,27 +12,27 @@ export const Sidebar = () => {
   const sidebarItems = [
     {
       icon: <IoHome size={25} />,
-      text: "Home",
+      text: "Главная",
       link: "/",
     },
     {
       icon: <IoSearch size={25} />,
-      text: "Search",
+      text: "Поиск",
       link: "/",
     },
     {
       icon: <MdNotificationsNone size={25} />,
-      text: "Notification",
+      text: "Уведомления",
       link: "/",
     },
     {
       icon: <FaRegPlusSquare size={25} />,
-      text: "Create",
+      text: "Создать пост",
       link: "/",
     },
     {
       icon: <CgProfile size={25} />,
-      text: "Profile",
+      text: "Профиль",
       link: "/",
     },
   ];
