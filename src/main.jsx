@@ -5,15 +5,21 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthPage } from "@/pages/AuthPage/AuthPage.jsx";
+import { HomePage } from "@/pages/HomePage/HomePage.jsx";
 
 const router = createBrowserRouter([
   {
-    index: true,
     path: "/",
     element: <App />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+    ],
   },
   {
-    path: "/auth",
+    path: "auth",
     element: <AuthPage />,
   },
 ]);
