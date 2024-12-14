@@ -2,7 +2,7 @@ import { Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { AvatarGroup, Avatar } from "@/components/ui/avatar";
 
 export const ProfileHeader = () => (
-  <Flex gap={{ base: 4, sm: 10 }} py={5} flexDirection={{ base: "column", sm: "row" }}>
+  <Flex gap={{ base: 4, sm: 10 }} py={3} flexDirection={{ base: "column", sm: "row" }}>
     <AvatarGroup
       size={{ base: "xl", md: "2xl" }}
       justifySelf={"center"}
