@@ -37,8 +37,7 @@ export const PostFooter = ({ userName }) => {
 
       <Text fontSize={"sm"} fontWeight={700}>
         {userName}
-        <Text as="span" fontWeight={400}>
-          {" "}
+        <Text as="span" fontWeight={400} ml={2}>
           Какой-то комментарий
         </Text>
       </Text>
