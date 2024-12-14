@@ -33,7 +33,7 @@ export const Sidebar = () => {
     {
       icon: <CgProfile size={25} />,
       text: "Профиль",
-      link: "/",
+      link: ":username",
     },
   ];
 
