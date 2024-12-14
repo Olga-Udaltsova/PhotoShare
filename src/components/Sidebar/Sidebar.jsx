@@ -27,7 +27,7 @@ export const Sidebar = () => {
     },
     {
       icon: <FaRegPlusSquare size={25} />,
-      text: "Создать пост",
+      text: "Создать публикацию",
       link: "/",
     },
     {

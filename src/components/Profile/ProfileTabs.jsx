@@ -20,7 +20,7 @@ export const ProfileTabs = () => (
         <BsGrid3X3 />
       </Box>
       <Text fontSize={12} display={{ base: "none", sm: "block" }}>
-        посты
+        публикации
       </Text>
     </Flex>
 

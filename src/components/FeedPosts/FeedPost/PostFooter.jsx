@@ -6,7 +6,7 @@ import { FaRegComment } from "react-icons/fa";
 import { useMemo, useState } from "react";
 import { getStrOfLikes } from "@/helpers/getStrOfLikes";
 
-export const PostFooter = ({ userName }) => {
+export const PostFooter = ({ userName, isProfilePage }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(100);
   const numberOfLike = useMemo(() => getStrOfLikes(likes), [likes]);
@@ -22,7 +22,7 @@ export const PostFooter = ({ userName }) => {
   };
 
   return (
-    <Box mb={10}>
+    <Box mb={10} mt={"auto"}>
       <Flex alignItems={"center"} gap={4} w={"full"} pt={0} mb={2} mt={4}>
         <Box onClick={handleLike} cursor={"pointer"} fontSize={18}>
           {!liked ? <PiHeart size={25} /> : <FcLike size={25} />}
@@ -35,15 +35,19 @@ export const PostFooter = ({ userName }) => {
         {numberOfLike}
       </Text>
 
-      <Text fontSize={"sm"} fontWeight={700}>
-        {userName}
-        <Text as="span" fontWeight={400} ml={2}>
-          Какой-то комментарий
-        </Text>
-      </Text>
-      <Text fontSize={"sm"} color="gray">
-        Посмотреть все комментарии
-      </Text>
+      {!isProfilePage && (
+        <>
+          <Text fontSize={"sm"} fontWeight={700}>
+            {userName}
+            <Text as="span" fontWeight={400} ml={2}>
+              Какой-то комментарий
+            </Text>
+          </Text>
+          <Text fontSize={"sm"} color="gray">
+            Посмотреть все комментарии
+          </Text>
+        </>
+      )}
 
       <Flex alignItems={"center"} gap={2} justifyContent={"space-between"} w={"full"}>
         <InputGroup
