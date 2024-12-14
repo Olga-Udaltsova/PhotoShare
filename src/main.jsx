@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthPage } from "@/pages/AuthPage/AuthPage.jsx";
 import { HomePage } from "@/pages/HomePage/HomePage.jsx";
+import { ProfilePage } from "@/pages/ProfilePage/ProfilePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: ":username",
+        element: <ProfilePage />,
       },
     ],
   },
