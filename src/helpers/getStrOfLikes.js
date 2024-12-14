@@ -1,5 +1,4 @@
-export function getStrOfLikes(num = 100) {
-  const str = "лайк";
+export function getStrOfLikes(num = 100, str = "лайк") {
   switch (true) {
     case num === 0:
     case num >= 11 && num <= 20:
