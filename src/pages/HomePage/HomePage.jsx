@@ -1,8 +1,11 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { FeedPosts } from "@/components/FeedPosts/FeedPosts";
 import { SuggestedUsers } from "@/components/SuggestedUsers/SuggestedUsers";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/firebase";
 export const HomePage = () => {
+  const { user } = useAuthState(auth);
+  console.log(user);
   return (
     <Container maxW="7xl">
       <Flex gap={20}>
