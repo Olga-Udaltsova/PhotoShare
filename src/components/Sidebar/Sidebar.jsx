@@ -1,4 +1,4 @@
-import { Box, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
@@ -7,6 +7,8 @@ import { FaRegPlusSquare } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { Logo, MobileLogo } from "@/assests/constans";
+import { useLogout } from "@/hooks/useLogout";
+import { Toaster } from "@/components/ui/toaster";
 
 export const Sidebar = () => {
   const sidebarItems = [
@@ -36,7 +38,7 @@ export const Sidebar = () => {
       link: ":username",
     },
   ];
-
+  const { handleLogout, isLoggingOut } = useLogout();
   return (
     <Box
       h={"100vh"}
@@ -93,10 +95,8 @@ export const Sidebar = () => {
             </Link>
           ))}
         </Flex>
-        <Link
-          display="flex"
-          to={"/auth"}
-          as={RouterLink}
+        <Flex
+          onClick={handleLogout}
           alignItems="center"
           gap={4}
           _hover={{ bg: "whiteAlpha.400" }}
@@ -108,8 +108,16 @@ export const Sidebar = () => {
           mt={"auto"}
         >
           <RiLogoutBoxLine size={25} />
-          <Box display={{ base: "none", md: "block" }}>Выйти</Box>
-        </Link>
+          <Button
+            display={{ base: "none", md: "block" }}
+            variant={"ghost"}
+            _hover={{ bg: "transparent" }}
+            isLoading={isLoggingOut}
+          >
+            Выйти
+          </Button>
+          <Toaster />
+        </Flex>
       </Flex>
     </Box>
   );
