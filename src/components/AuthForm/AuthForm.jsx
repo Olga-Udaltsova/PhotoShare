@@ -20,7 +20,7 @@ export const AuthForm = () => {
             </Text>
             <Box flex={2} h="1px" bg={"gray.400"} />
           </Flex>
-          <GoogleAuth />
+          <GoogleAuth prefix={isLogin ? "Войти" : "Зарегистрироваться"} />
         </VStack>
       </Box>
 
