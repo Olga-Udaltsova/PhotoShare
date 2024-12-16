@@ -6,11 +6,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/firebase";
 
 function App() {
-  const { user } = useAuthState(auth);
+  const [authUser] = useAuthState(auth);
   return (
     <>
-      <Flex flexDirection={!user ? "column" : "row"}>
-        {user ? (
+      <Flex flexDirection={!authUser ? "column" : "row"}>
+        {authUser ? (
           <Box w={{ base: "70px", md: "240px" }}>
             <Sidebar />
           </Box>

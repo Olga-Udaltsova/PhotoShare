@@ -20,6 +20,7 @@ export const SuggestedUsers = () => {
       followers: 100,
     },
   ];
+
   return (
     <VStack py={8} px={6} gap={4}>
       <SuggestedHeader />

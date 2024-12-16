@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 export const SuggestedHeader = () => {
   const { handleLogout, isLoggingOut } = useLogout();
   const authUser = useAuthStore((state) => state.user);
+
+  if (!authUser) return null;
+
   return (
     <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"}>
       <Flex alignItems={"center"} gap={2}>
@@ -28,7 +31,7 @@ export const SuggestedHeader = () => {
         color={"blue.400"}
         cursor={"pointer"}
         onClick={handleLogout}
-        isLoading={isLoggingOut}
+        loading={isLoggingOut}
       >
         Выйти
       </Button>

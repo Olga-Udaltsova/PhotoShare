@@ -2,14 +2,16 @@ import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import { useLogin } from "@/hooks/useLogin";
 import { Toaster } from "@/components/ui/toaster";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const { loading, login } = useLogin(navigate);
 
-  const { loading, login } = useLogin();
   return (
     <>
       <Input
@@ -34,7 +36,7 @@ export const Login = () => {
         colorScheme="blue"
         size="sm"
         fontSize={14}
-        isLoading={loading}
+        loading={loading}
         onClick={() => login(inputs)}
       >
         Войти

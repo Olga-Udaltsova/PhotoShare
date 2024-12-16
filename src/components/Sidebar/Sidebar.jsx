@@ -112,7 +112,7 @@ export const Sidebar = () => {
             display={{ base: "none", md: "block" }}
             variant={"ghost"}
             _hover={{ bg: "transparent" }}
-            isLoading={isLoggingOut}
+            loading={isLoggingOut}
           >
             Выйти
           </Button>

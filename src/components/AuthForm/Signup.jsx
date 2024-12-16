@@ -4,6 +4,7 @@ import { InputGroup } from "@/components/ui/input-group";
 import { Toaster } from "@/components/ui/toaster";
 import { useState } from "react";
 import { useSignUp } from "@/hooks/useSignUp";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const [inputs, setInputs] = useState({
@@ -12,9 +13,9 @@ export const Signup = () => {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { loading, signup } = useSignUp();
+  const { loading, signup } = useSignUp(navigate);
 
   return (
     <>
@@ -70,7 +71,7 @@ export const Signup = () => {
         colorScheme="blue"
         size="sm"
         fontSize={14}
-        isLoading={loading}
+        loading={loading}
         onClick={() => signup(inputs)}
       >
         Зарегистрироваться

@@ -4,7 +4,7 @@ import { useShowToast } from "./useShowToast";
 import { useAuthStore } from "@/store/authStore";
 import { doc, getDoc } from "firebase/firestore";
 
-export const useLogin = () => {
+export const useLogin = (navigate) => {
   const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth);
   const showToast = useShowToast();
   const loginUser = useAuthStore((state) => state.login);
@@ -20,6 +20,7 @@ export const useLogin = () => {
         const docSnap = await getDoc(docRef);
         localStorage.setItem("user-info", JSON.stringify(docSnap.data()));
         loginUser(docSnap.data());
+        navigate("/");
       }
     } catch (error) {
       showToast("Ошибка", error.message, "error");

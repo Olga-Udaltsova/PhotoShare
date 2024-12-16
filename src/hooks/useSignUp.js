@@ -5,7 +5,7 @@ import { useShowToast } from "./useShowToast";
 import { useAuthStore } from "@/store/authStore";
 import { collection, query, where } from "firebase/firestore";
 
-export const useSignUp = () => {
+export const useSignUp = (navigate) => {
   const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const showToast = useShowToast();
@@ -48,6 +48,7 @@ export const useSignUp = () => {
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));
         loginUser(userDoc);
+        navigate("/");
       }
     } catch (error) {
       showToast("Ошибка", error.message, "error");
