@@ -11,6 +11,7 @@ export const GoogleAuth = ({ prefix }) => {
   const showToast = useShowToast();
   const loginUser = useAuthStore((state) => state.login);
   const navigate = useNavigate();
+
   const handleGoogleAuth = async () => {
     try {
       const newUser = await signInWithGoogle();
@@ -48,6 +49,7 @@ export const GoogleAuth = ({ prefix }) => {
       showToast("Ошибка", error.message, "error");
     }
   };
+
   return (
     <Flex justifyContent="center" alignItems="center" cursor="pointer" onClick={handleGoogleAuth}>
       <Image src="/google.png" w={9} alt="логотип Google" />
