@@ -24,6 +24,7 @@ export const GoogleAuth = ({ prefix }) => {
         const userDoc = userShap.data();
         localStorage.setItem("user-info", JSON.stringify(userDoc));
         loginUser(userDoc);
+        navigate("/");
         return;
       } else {
         const userDoc = {
