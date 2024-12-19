@@ -35,7 +35,7 @@ export const Login = () => {
         colorScheme="blue"
         size="sm"
         fontSize={14}
-        loading={loading}
+        isLoading={loading}
         onClick={() => login(inputs)}
       >
         Войти

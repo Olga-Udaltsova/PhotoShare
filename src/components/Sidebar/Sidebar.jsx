@@ -35,7 +35,7 @@ export const Sidebar = () => {
     {
       icon: <CgProfile size={25} />,
       text: "Профиль",
-      link: ":username",
+      link: ":userName",
     },
   ];
   const { handleLogout, isLoggingOut } = useLogout();
@@ -112,7 +112,7 @@ export const Sidebar = () => {
             display={{ base: "none", md: "block" }}
             variant={"ghost"}
             _hover={{ bg: "transparent" }}
-            loading={isLoggingOut}
+            isLoading={isLoggingOut}
           >
             Выйти
           </Button>

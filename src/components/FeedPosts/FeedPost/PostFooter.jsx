@@ -4,12 +4,12 @@ import { FcLike } from "react-icons/fc";
 import { PiHeart } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa";
 import { useMemo, useState } from "react";
-import { getStrOfLikes } from "@/helpers/getStrOfLikes";
+import { getString } from "@/helpers/getString";
 
 export const PostFooter = ({ userName, isProfilePage }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(100);
-  const numberOfLike = useMemo(() => getStrOfLikes(likes), [likes]);
+  const numberOfLike = useMemo(() => getString(likes), [likes]);
 
   const handleLike = () => {
     if (liked) {

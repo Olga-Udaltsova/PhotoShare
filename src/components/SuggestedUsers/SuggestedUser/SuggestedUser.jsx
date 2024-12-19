@@ -1,13 +1,13 @@
 import { Box, Button, Flex, VStack } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import { useMemo, useState } from "react";
-import { getStrOfLikes } from "@/helpers/getStrOfLikes";
+import { getString } from "@/helpers/getString";
 
 export const SuggestedUser = ({ user }) => {
   const { name, img, followers } = user;
   const [follower, setFollower] = useState(followers);
   const [isFollowed, setIsFollowed] = useState(false);
-  const numberOfFollowers = useMemo(() => getStrOfLikes(follower, "подписчик"), [follower]);
+  const numberOfFollowers = useMemo(() => getString(follower, "подписчик"), [follower]);
 
   const handleFollower = () => {
     if (isFollowed) {
