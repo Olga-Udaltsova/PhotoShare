@@ -1,7 +1,6 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Button, Input } from "@chakra-ui/react";
 import { InputGroup } from "@/components/ui/input-group";
-import { Toaster } from "@/components/ui/toaster";
 import { useState } from "react";
 import { useSignUp } from "@/hooks/useSignUp";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +64,6 @@ export const Signup = () => {
           onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
         />
       </InputGroup>
-      <Toaster />
       <Button
         w="full"
         colorScheme="blue"

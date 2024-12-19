@@ -1,7 +1,6 @@
 import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import { useLogin } from "@/hooks/useLogin";
-import { Toaster } from "@/components/ui/toaster";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -41,7 +40,6 @@ export const Login = () => {
       >
         Войти
       </Button>
-      <Toaster />
     </>
   );
 };
