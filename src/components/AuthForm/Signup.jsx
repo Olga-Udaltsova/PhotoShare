@@ -69,7 +69,7 @@ export const Signup = () => {
         colorScheme="blue"
         size="sm"
         fontSize={14}
-        loading={loading}
+        isLoading={loading}
         onClick={() => signup(inputs)}
       >
         Зарегистрироваться
