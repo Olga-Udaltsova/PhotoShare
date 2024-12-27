@@ -3,7 +3,6 @@ import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { Login } from "./Login";
 import { Signup } from "./Signup";
 import { GoogleAuth } from "./GoogleAuth";
-import { Toaster } from "@/components/ui/toaster";
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -34,7 +33,6 @@ export const AuthForm = () => {
             {isLogin ? "Зарегистрироваться" : "Войти"}
           </Box>
         </Flex>
-        <Toaster />
       </Box>
     </>
   );

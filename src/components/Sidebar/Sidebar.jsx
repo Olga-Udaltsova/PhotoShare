@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Flex, Link } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import { Link as RouterLink } from "react-router-dom";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { Logo, MobileLogo } from "@/assests/constans";
 import { useLogout } from "@/hooks/useLogout";
-import { Toaster } from "@/components/ui/toaster";
 import { SidebarItems } from "./SidebarItems";
 
 export const Sidebar = () => {
@@ -63,11 +63,10 @@ export const Sidebar = () => {
             display={{ base: "none", md: "block" }}
             variant={"ghost"}
             _hover={{ bg: "transparent" }}
-            loading={isLoggingOut.toString()}
+            loading={isLoggingOut}
           >
             Выйти
           </Button>
-          <Toaster />
         </Flex>
       </Flex>
     </Box>

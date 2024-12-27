@@ -1,4 +1,5 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { useLogout } from "@/hooks/useLogout";
 import { useAuthStore } from "@/store/authStore";
@@ -31,7 +32,7 @@ export const SuggestedHeader = () => {
         color={"blue.400"}
         cursor={"pointer"}
         onClick={handleLogout}
-        loading={isLoggingOut.toString()}
+        loading={isLoggingOut}
       >
         Выйти
       </Button>

@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthPage } from "@/pages/AuthPage/AuthPage.jsx";
 import { HomePage } from "@/pages/HomePage/HomePage.jsx";
 import { ProfilePage } from "@/pages/ProfilePage/ProfilePage.jsx";
+import { SearchPage } from "@/pages/SearchPage/SearchPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: ":userName",
         element: <ProfilePage />,
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
       },
     ],
   },

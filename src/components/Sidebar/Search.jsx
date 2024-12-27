@@ -7,7 +7,7 @@ export const Search = () => (
   <Tooltip showArrow content="Поиск" positioning={{ placement: "right" }} openDelay={500}>
     <Link
       display="flex"
-      to={"/"}
+      to={"/search"}
       as={RouterLink}
       alignItems="center"
       gap={4}
