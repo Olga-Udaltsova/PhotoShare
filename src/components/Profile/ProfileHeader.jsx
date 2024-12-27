@@ -2,7 +2,7 @@ import { Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { AvatarGroup, Avatar } from "@/components/ui/avatar";
 import { useUserProfileStore } from "@/store/userProfileStore";
 import { useAuthStore } from "@/store/AuthStore";
-import { getString, getStringOfFollowers } from "@/helpers/getString";
+import { getString, getStringOfFollowing } from "@/helpers/getString";
 import {
   DialogCloseTrigger,
   DialogContent,
@@ -19,7 +19,7 @@ export const ProfileHeader = () => {
   const visitingOwnProfile = authUser && authUser.userName === userProfile.userName;
   const visitingAnotherProfile = authUser && authUser.userName !== userProfile.userName;
   const numsOfPosts = getString(userProfile.posts.length, "пост");
-  const numsOfFollowing = getStringOfFollowers(userProfile.following.length);
+  const numsOfFollowing = getStringOfFollowing(userProfile.following.length);
   const numsOfFollowers = getString(userProfile.followers.length, "подписчик");
 
   return (

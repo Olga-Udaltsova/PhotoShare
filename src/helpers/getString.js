@@ -14,7 +14,7 @@ export function getString(num = 100, str = "лайк") {
   }
 }
 
-export function getStringOfFollowers(num = 100) {
+export function getStringOfFollowing(num = 100) {
   switch (true) {
     case num === 0:
     case num >= 5 && num <= 20:
