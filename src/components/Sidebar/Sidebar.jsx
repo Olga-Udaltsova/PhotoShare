@@ -1,45 +1,12 @@
 import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { IoHome } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
-import { MdNotificationsNone } from "react-icons/md";
-import { FaRegPlusSquare } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { Logo, MobileLogo } from "@/assests/constans";
 import { useLogout } from "@/hooks/useLogout";
 import { Toaster } from "@/components/ui/toaster";
-import { useAuthStore } from "@/store/authStore";
+import { SidebarItems } from "./SidebarItems";
 
 export const Sidebar = () => {
-  const authUser = useAuthStore((state) => state.user);
-  const sidebarItems = [
-    {
-      icon: <IoHome size={25} />,
-      text: "Главная",
-      link: "/",
-    },
-    {
-      icon: <IoSearch size={25} />,
-      text: "Поиск",
-      link: "/",
-    },
-    {
-      icon: <MdNotificationsNone size={25} />,
-      text: "Уведомления",
-      link: "/",
-    },
-    {
-      icon: <FaRegPlusSquare size={25} />,
-      text: "Создать публикацию",
-      link: "/",
-    },
-    {
-      icon: <CgProfile size={25} />,
-      text: "Профиль",
-      link: authUser.userName,
-    },
-  ];
   const { handleLogout, isLoggingOut } = useLogout();
   return (
     <Box
@@ -77,25 +44,7 @@ export const Sidebar = () => {
           <MobileLogo />
         </Link>
         <Flex direction="column" gap={5} cursor="pointer">
-          {sidebarItems.map((item, index) => (
-            <Link
-              key={index}
-              display="flex"
-              to={item.link}
-              as={RouterLink}
-              alignItems="center"
-              gap={4}
-              _hover={{ bg: "whiteAlpha.400" }}
-              borderRadius={6}
-              p={2}
-              w={{ base: 10, md: "full" }}
-              justifyContent={{ base: "center", md: "flex-start" }}
-              alignContent={{ base: "center", md: "flex-start" }}
-            >
-              {item.icon}
-              <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
-            </Link>
-          ))}
+          <SidebarItems />
         </Flex>
         <Flex
           onClick={handleLogout}
