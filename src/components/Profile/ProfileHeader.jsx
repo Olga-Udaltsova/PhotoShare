@@ -1,4 +1,5 @@
-import { Button, Flex, Text, VStack } from "@chakra-ui/react";
+import { Flex, Text, VStack } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import { AvatarGroup, Avatar } from "@/components/ui/avatar";
 import { useUserProfileStore } from "@/store/userProfileStore";
 import { useAuthStore } from "@/store/AuthStore";
@@ -64,7 +65,7 @@ export const ProfileHeader = () => {
                   _hover={{ bg: "blue.600" }}
                   size={{ base: "xs", md: "sm" }}
                   onClick={handleFollowUser}
-                  loading={isUpdating.toString()}
+                  loading={isUpdating}
                 >
                   {isFollowing ? "Отписаться" : "Подписаться"}
                 </Button>

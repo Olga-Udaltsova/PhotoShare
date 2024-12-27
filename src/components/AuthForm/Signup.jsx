@@ -1,5 +1,6 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import { InputGroup } from "@/components/ui/input-group";
 import { useState } from "react";
 import { useSignUp } from "@/hooks/useSignUp";
@@ -69,7 +70,7 @@ export const Signup = () => {
         colorScheme="blue"
         size="sm"
         fontSize={14}
-        loading={loading.toString()}
+        loading={loading}
         onClick={() => signup(inputs)}
       >
         Зарегистрироваться

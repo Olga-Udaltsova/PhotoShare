@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/firebase";
+import { Toaster } from "@/components/ui/toaster";
 
 function App() {
   const [authUser] = useAuthState(auth);
@@ -20,6 +21,7 @@ function App() {
         <Box flex={1} w={{ base: "calc(100% - 70px)", md: "calc(100%-240px)" }} mx={"auto"}>
           <Outlet />
         </Box>
+        <Toaster />
       </Flex>
     </>
   );

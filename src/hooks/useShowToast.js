@@ -3,7 +3,7 @@ import { useCallback } from "react";
 
 export const useShowToast = () => {
   const showToast = useCallback(
-    () => (title, description, type) => {
+    (title, description, type) => {
       toaster.create({
         title,
         description,

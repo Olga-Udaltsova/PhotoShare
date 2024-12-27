@@ -5,7 +5,6 @@ import { ProfilePosts } from "@/components/Profile/ProfilePosts";
 import { useGetUserProfile } from "@/hooks/useGetUserProfile";
 import { useParams } from "react-router-dom";
 import { UserNotFound } from "@/components/UserNotFound/UserNotFound";
-import { Toaster } from "@/components/ui/toaster";
 
 export const ProfilePage = () => {
   const { userName } = useParams();
@@ -30,7 +29,6 @@ export const ProfilePage = () => {
         <ProfileTabs />
         <ProfilePosts />
       </Flex>
-      <Toaster />
     </Container>
   );
 };

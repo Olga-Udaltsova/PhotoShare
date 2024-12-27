@@ -1,4 +1,5 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useLogin } from "@/hooks/useLogin";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +36,7 @@ export const Login = () => {
         colorScheme="blue"
         size="sm"
         fontSize={14}
-        loading={loading.toString()}
+        loading={loading}
         onClick={() => login(inputs)}
       >
         Войти

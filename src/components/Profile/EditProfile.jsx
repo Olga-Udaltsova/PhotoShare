@@ -1,4 +1,5 @@
-import { Button, Input, Stack, Center, Badge } from "@chakra-ui/react";
+import { Input, Stack, Center, Badge } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 import { Fieldset } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import { Field } from "@/components/ui/field";
@@ -121,7 +122,7 @@ export const EditProfile = () => {
               bg: "blue.500",
             }}
             onClick={handleEditProfile}
-            loading={isUpdating.toString()}
+            loading={isUpdating}
             disabled={!inputs.userName}
           >
             Сохранить
