@@ -2,7 +2,7 @@ import { Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { AvatarGroup, Avatar } from "@/components/ui/avatar";
 import { useUserProfileStore } from "@/store/userProfileStore";
 import { useAuthStore } from "@/store/AuthStore";
-import { getString } from "@/helpers/getString";
+import { getString, getStringOfFollowing } from "@/helpers/getString";
 import {
   DialogCloseTrigger,
   DialogContent,
@@ -10,15 +10,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { EditProfile } from "./EditProfile";
+import { useFollowUser } from "@/hooks/useFollowUser";
 
 export const ProfileHeader = () => {
   const { userProfile } = useUserProfileStore();
+  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(userProfile?.uid);
   const authUser = useAuthStore((state) => state.user);
   const visitingOwnProfile = authUser && authUser.userName === userProfile.userName;
   const visitingAnotherProfile = authUser && authUser.userName !== userProfile.userName;
   const numsOfPosts = getString(userProfile.posts.length, "пост");
-  const numsOfFollowers = getString(userProfile.followers.length, "подписк");
-  const numsOfFollowing = getString(userProfile.following.length, "подписчик");
+  const numsOfFollowing = getStringOfFollowing(userProfile.following.length);
+  const numsOfFollowers = getString(userProfile.followers.length, "подписчик");
 
   return (
     <DialogRoot placement={"center"} size={{ base: "sm", md: "xl" }}>
@@ -61,8 +63,10 @@ export const ProfileHeader = () => {
                   color={"white"}
                   _hover={{ bg: "blue.600" }}
                   size={{ base: "xs", md: "sm" }}
+                  onClick={handleFollowUser}
+                  loading={isUpdating.toString()}
                 >
-                  Подписаться
+                  {isFollowing ? "Отписаться" : "Подписаться"}
                 </Button>
               </Flex>
             )}
@@ -76,13 +80,13 @@ export const ProfileHeader = () => {
 
             <Text fontSize={{ base: "xs", md: "sm" }}>
               <Text as="span" fontWeight={"bold"} mr={1}>
-                {numsOfFollowers}
+                {numsOfFollowing}
               </Text>
             </Text>
 
             <Text fontSize={{ base: "xs", md: "sm" }}>
               <Text as="span" fontWeight={"bold"} mr={1}>
-                {numsOfFollowing}
+                {numsOfFollowers}
               </Text>
             </Text>
           </Flex>

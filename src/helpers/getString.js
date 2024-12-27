@@ -13,3 +13,21 @@ export function getString(num = 100, str = "лайк") {
       return `${num} ${str}ов`;
   }
 }
+
+export function getStringOfFollowing(num = 100) {
+  switch (true) {
+    case num === 0:
+    case num >= 5 && num <= 20:
+      return `${num} подписок`;
+    case num === 1:
+    case num % 10 === 1:
+      return `${num} подписка`;
+    case num % 10 === 0:
+    case num % 10 >= 5 && num % 10 <= 9:
+      return `${num} подписок`;
+    case num % 10 >= 2 && num % 10 <= 4:
+      return `${num} подписки`;
+    default:
+      return `${num} подписки`;
+  }
+}
