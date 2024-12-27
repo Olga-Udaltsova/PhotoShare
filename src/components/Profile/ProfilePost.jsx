@@ -70,6 +70,7 @@ export const ProfilePost = ({ post }) => {
               borderColor={"whiteAlpha.300"}
               flex={1.5}
               maxH={"max-content"}
+              my={"auto"}
             >
               <Image src={img} alt="Картинка поста" />
             </Box>

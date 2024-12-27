@@ -1,11 +1,18 @@
 import { Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { AvatarGroup, Avatar } from "@/components/ui/avatar";
-import { userUserProfileStore } from "@/store/userProfileStore";
+import { useUserProfileStore } from "@/store/userProfileStore";
 import { useAuthStore } from "@/store/AuthStore";
 import { getString } from "@/helpers/getString";
+import {
+  DialogCloseTrigger,
+  DialogContent,
+  DialogRoot,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { EditProfile } from "./EditProfile";
 
 export const ProfileHeader = () => {
-  const { userProfile } = userUserProfileStore();
+  const { userProfile } = useUserProfileStore();
   const authUser = useAuthStore((state) => state.user);
   const visitingOwnProfile = authUser && authUser.userName === userProfile.userName;
   const visitingAnotherProfile = authUser && authUser.userName !== userProfile.userName;
@@ -14,75 +21,91 @@ export const ProfileHeader = () => {
   const numsOfFollowing = getString(userProfile.following.length, "подписчик");
 
   return (
-    <Flex gap={{ base: 4, sm: 10 }} py={3} flexDirection={{ base: "column", sm: "row" }}>
-      <AvatarGroup
-        size={{ base: "xl", md: "2xl" }}
-        justifySelf={"center"}
-        alignSelf={"self-start"}
-        mx={"auto"}
-      >
-        <Avatar src={userProfile.profilePicURL} alt="Аватар профиля" />
-      </AvatarGroup>
-      <VStack alignItems={"start"} gap={2} mx={"auto"} flex={1}>
-        <Flex
-          gap={4}
-          flexDirection={{ base: "column", sm: "row" }}
-          justifyContent={{ base: "center", sm: "flex-start" }}
-          alignItems={"center"}
-          w={"full"}
+    <DialogRoot placement={"center"} size={{ base: "sm", md: "xl" }}>
+      <Flex gap={{ base: 4, sm: 10 }} py={3} flexDirection={{ base: "column", sm: "row" }}>
+        <AvatarGroup
+          size={{ base: "xl", md: "2xl" }}
+          justifySelf={"center"}
+          alignSelf={"self-start"}
+          mx={"auto"}
         >
-          <Text fontSize={{ base: "sm", md: "lg" }}>{userProfile.userName}</Text>
-          {visitingOwnProfile && (
-            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
-              <Button
-                bg={"white"}
-                color={"black"}
-                _hover={{ bg: "whiteAlpha.800" }}
-                size={{ base: "xs", md: "sm" }}
-              >
-                Редактировать профиль
-              </Button>
-            </Flex>
-          )}
-          {visitingAnotherProfile && (
-            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
-              <Button
-                bg={"blue.500"}
-                color={"white"}
-                _hover={{ bg: "blue.600" }}
-                size={{ base: "xs", md: "sm" }}
-              >
-                Подписаться
-              </Button>
-            </Flex>
-          )}
-        </Flex>
-        <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
-          <Text fontSize={{ base: "xs", md: "sm" }}>
-            <Text as="span" fontWeight={"bold"} mr={1}>
-              {numsOfPosts}
+          <Avatar src={userProfile.profilePicURL} alt="Аватар профиля" />
+        </AvatarGroup>
+        <VStack alignItems={"start"} gap={2} mx={"auto"} flex={1}>
+          <Flex
+            gap={4}
+            flexDirection={{ base: "column", sm: "row" }}
+            justifyContent={{ base: "center", sm: "flex-start" }}
+            alignItems={"center"}
+            w={"full"}
+          >
+            <Text fontSize={{ base: "sm", md: "lg" }}>{userProfile.userName}</Text>
+            {visitingOwnProfile && (
+              <DialogTrigger asChild>
+                <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+                  <Button
+                    bg={"white"}
+                    color={"black"}
+                    _hover={{ bg: "whiteAlpha.800" }}
+                    size={{ base: "xs", md: "sm" }}
+                  >
+                    Редактировать профиль
+                  </Button>
+                </Flex>
+              </DialogTrigger>
+            )}
+            {visitingAnotherProfile && (
+              <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+                <Button
+                  bg={"blue.500"}
+                  color={"white"}
+                  _hover={{ bg: "blue.600" }}
+                  size={{ base: "xs", md: "sm" }}
+                >
+                  Подписаться
+                </Button>
+              </Flex>
+            )}
+          </Flex>
+          <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
+            <Text fontSize={{ base: "xs", md: "sm" }}>
+              <Text as="span" fontWeight={"bold"} mr={1}>
+                {numsOfPosts}
+              </Text>
             </Text>
-          </Text>
 
-          <Text fontSize={{ base: "xs", md: "sm" }}>
-            <Text as="span" fontWeight={"bold"} mr={1}>
-              {numsOfFollowers}
+            <Text fontSize={{ base: "xs", md: "sm" }}>
+              <Text as="span" fontWeight={"bold"} mr={1}>
+                {numsOfFollowers}
+              </Text>
             </Text>
-          </Text>
 
-          <Text fontSize={{ base: "xs", md: "sm" }}>
-            <Text as="span" fontWeight={"bold"} mr={1}>
-              {numsOfFollowing}
+            <Text fontSize={{ base: "xs", md: "sm" }}>
+              <Text as="span" fontWeight={"bold"} mr={1}>
+                {numsOfFollowing}
+              </Text>
             </Text>
-          </Text>
-        </Flex>
-        <Flex alignItems={"center"} gap={4}>
-          <Text fontSize={"sm"} fontWeight={"bold"}>
-            {userProfile.fullName}
-          </Text>
-        </Flex>
-        <Text fontSize={"sm"}>{userProfile.bio}</Text>
-      </VStack>
-    </Flex>
+          </Flex>
+          <Flex alignItems={"center"} gap={4}>
+            <Text fontSize={"sm"} fontWeight={"bold"}>
+              {userProfile.fullName}
+            </Text>
+          </Flex>
+          <Text fontSize={"sm"}>{userProfile.bio}</Text>
+        </VStack>
+      </Flex>
+
+      <DialogContent
+        maxW={"max-content"}
+        maxH={"max-content"}
+        bg={"black"}
+        rounded={"xl"}
+        boxShadow={"lg"}
+      >
+        <EditProfile />
+
+        <DialogCloseTrigger />
+      </DialogContent>
+    </DialogRoot>
   );
 };

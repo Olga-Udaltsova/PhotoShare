@@ -9,8 +9,10 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { Logo, MobileLogo } from "@/assests/constans";
 import { useLogout } from "@/hooks/useLogout";
 import { Toaster } from "@/components/ui/toaster";
+import { useAuthStore } from "@/store/authStore";
 
 export const Sidebar = () => {
+  const authUser = useAuthStore((state) => state.user);
   const sidebarItems = [
     {
       icon: <IoHome size={25} />,
@@ -35,7 +37,7 @@ export const Sidebar = () => {
     {
       icon: <CgProfile size={25} />,
       text: "Профиль",
-      link: ":userName",
+      link: authUser.userName,
     },
   ];
   const { handleLogout, isLoggingOut } = useLogout();
@@ -112,7 +114,7 @@ export const Sidebar = () => {
             display={{ base: "none", md: "block" }}
             variant={"ghost"}
             _hover={{ bg: "transparent" }}
-            isLoading={isLoggingOut}
+            loading={isLoggingOut.toString()}
           >
             Выйти
           </Button>
