@@ -31,7 +31,7 @@ export const SuggestedHeader = () => {
         color={"blue.400"}
         cursor={"pointer"}
         onClick={handleLogout}
-        loading={isLoggingOut}
+        loading={isLoggingOut.toString()}
       >
         Выйти
       </Button>
