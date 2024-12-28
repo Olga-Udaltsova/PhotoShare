@@ -63,7 +63,6 @@ export const useFollowUser = (userId) => {
       }
     } catch (error) {
       showToast("Ошибка", error.message, "error");
-    } finally {
     }
   };
 
