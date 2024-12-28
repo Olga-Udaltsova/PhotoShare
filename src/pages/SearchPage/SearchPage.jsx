@@ -14,7 +14,7 @@ export default function SearchPage() {
     getUserProfile(searchRef.current.value);
   };
   return (
-    <Container mx={"auto"}>
+    <Container px={40}>
       <Heading textAlign={"center"} my={4}>
         Поиск пользователя
       </Heading>
