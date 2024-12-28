@@ -5,7 +5,7 @@ import { useSearchUser } from "@/hooks/useSearchUser";
 import { useRef } from "react";
 import { SuggestedUser } from "@/components/SuggestedUsers/SuggestedUser/SuggestedUser";
 
-export const SearchPage = () => {
+export default function SearchPage() {
   const searchRef = useRef(null);
   const { user, isLoading, getUserProfile, setUser } = useSearchUser();
 
@@ -31,4 +31,4 @@ export const SearchPage = () => {
       {user && <SuggestedUser user={user} setUser={setUser} />}
     </Container>
   );
-};
+}

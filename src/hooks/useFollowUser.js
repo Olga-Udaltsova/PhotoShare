@@ -7,7 +7,6 @@ import { firestore } from "@/firebase/firebase";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 export const useFollowUser = (userId) => {
-  const [isUpdating, setIsUpdating] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const { user, setUser } = useAuthStore();
   const { userProfile, setUserProfile } = useUserProfileStore();
@@ -45,8 +44,6 @@ export const useFollowUser = (userId) => {
           "user-info",
           JSON.stringify({ ...user, following: user.following.filter((uid) => uid !== userId) })
         );
-
-        setIsFollowing(false);
       } else {
         setUser({
           ...user,
@@ -67,9 +64,8 @@ export const useFollowUser = (userId) => {
     } catch (error) {
       showToast("Ошибка", error.message, "error");
     } finally {
-      setIsUpdating(true);
     }
   };
 
-  return { isUpdating, isFollowing, handleFollowUser };
+  return { isFollowing, handleFollowUser };
 };

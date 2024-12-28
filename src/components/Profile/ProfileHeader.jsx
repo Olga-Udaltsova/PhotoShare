@@ -15,7 +15,7 @@ import { useFollowUser } from "@/hooks/useFollowUser";
 
 export const ProfileHeader = () => {
   const { userProfile } = useUserProfileStore();
-  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(userProfile?.uid);
+  const { isFollowing, handleFollowUser } = useFollowUser(userProfile?.uid);
   const authUser = useAuthStore((state) => state.user);
   const visitingOwnProfile = authUser && authUser.userName === userProfile.userName;
   const visitingAnotherProfile = authUser && authUser.userName !== userProfile.userName;
@@ -65,7 +65,6 @@ export const ProfileHeader = () => {
                   _hover={{ bg: "blue.600" }}
                   size={{ base: "xs", md: "sm" }}
                   onClick={handleFollowUser}
-                  loading={isUpdating}
                 >
                   {isFollowing ? "Отписаться" : "Подписаться"}
                 </Button>

@@ -6,7 +6,7 @@ import { useGetUserProfile } from "@/hooks/useGetUserProfile";
 import { useParams } from "react-router-dom";
 import { UserNotFound } from "@/components/UserNotFound/UserNotFound";
 
-export const ProfilePage = () => {
+export default function ProfilePage() {
   const { userName } = useParams();
   const { isLoading, userProfile } = useGetUserProfile(userName);
   const userNotFound = !isLoading && !userProfile;
@@ -31,4 +31,4 @@ export const ProfilePage = () => {
       </Flex>
     </Container>
   );
-};
+}

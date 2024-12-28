@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Image, VStack } from "@chakra-ui/react";
 import { AuthForm } from "@/components/AuthForm/AuthForm";
 
-export const AuthPage = () => {
+export default function AuthPage() {
   return (
     <Flex minH="100vh" justifyContent="center" alignItems="center" px={4}>
       <Container maxW="3xl" padding={0}>
@@ -16,4 +16,4 @@ export const AuthPage = () => {
       </Container>
     </Flex>
   );
-};
+}

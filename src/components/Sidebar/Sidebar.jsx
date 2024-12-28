@@ -5,6 +5,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { Logo, MobileLogo } from "@/assests/constans";
 import { useLogout } from "@/hooks/useLogout";
 import { SidebarItems } from "./SidebarItems";
+import { SpinnerCircular } from "spinners-react";
 
 export const Sidebar = () => {
   const { handleLogout, isLoggingOut } = useLogout();
@@ -63,9 +64,17 @@ export const Sidebar = () => {
             display={{ base: "none", md: "block" }}
             variant={"ghost"}
             _hover={{ bg: "transparent" }}
-            loading={isLoggingOut}
           >
-            Выйти
+            {isLoggingOut ? (
+              <SpinnerCircular
+                thickness={100}
+                speed={100}
+                color="rgba(57, 172, 140, 1)"
+                secondaryColor="rgba(0, 0, 0, 1)"
+              />
+            ) : (
+              "Выйти"
+            )}
           </Button>
         </Flex>
       </Flex>

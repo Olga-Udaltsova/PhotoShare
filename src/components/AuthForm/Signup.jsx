@@ -5,6 +5,7 @@ import { InputGroup } from "@/components/ui/input-group";
 import { useState } from "react";
 import { useSignUp } from "@/hooks/useSignUp";
 import { useNavigate } from "react-router-dom";
+import { SpinnerCircular } from "spinners-react";
 
 export const Signup = () => {
   const [inputs, setInputs] = useState({
@@ -65,15 +66,17 @@ export const Signup = () => {
           onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
         />
       </InputGroup>
-      <Button
-        w="full"
-        colorScheme="blue"
-        size="sm"
-        fontSize={14}
-        loading={loading}
-        onClick={() => signup(inputs)}
-      >
-        Зарегистрироваться
+      <Button w="full" colorScheme="blue" size="sm" fontSize={14} onClick={() => signup(inputs)}>
+        {loading ? (
+          <SpinnerCircular
+            thickness={100}
+            speed={100}
+            color="rgba(57, 172, 140, 1)"
+            secondaryColor="rgba(0, 0, 0, 1)"
+          />
+        ) : (
+          "Зарегистрироваться"
+        )}
       </Button>
     </>
   );

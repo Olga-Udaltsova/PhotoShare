@@ -9,7 +9,7 @@ import { useAuthStore } from "@/store/authStore";
 export const SuggestedUser = ({ user, setUser }) => {
   const { fullName, profilePicURL, followers } = user;
   const authUser = useAuthStore((state) => state.user);
-  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(user.uid);
+  const { isFollowing, handleFollowUser } = useFollowUser(user.uid);
   const numberOfFollowers = useMemo(() => getString(followers.length, "подписчик"), [followers]);
 
   const onFollowUser = async () => {
@@ -46,7 +46,6 @@ export const SuggestedUser = ({ user, setUser }) => {
           cursor={"pointer"}
           _hover={{ color: " white" }}
           onClick={onFollowUser}
-          loading={isUpdating}
         >
           {isFollowing ? "Отписаться" : "Подписаться"}
         </Button>

@@ -4,6 +4,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { useLogout } from "@/hooks/useLogout";
 import { useAuthStore } from "@/store/authStore";
 import { Link } from "react-router-dom";
+import { SpinnerCircular } from "spinners-react";
 
 export const SuggestedHeader = () => {
   const { handleLogout, isLoggingOut } = useLogout();
@@ -32,9 +33,17 @@ export const SuggestedHeader = () => {
         color={"blue.400"}
         cursor={"pointer"}
         onClick={handleLogout}
-        loading={isLoggingOut}
       >
-        Выйти
+        {isLoggingOut ? (
+          <SpinnerCircular
+            thickness={100}
+            speed={100}
+            color="rgba(57, 172, 140, 1)"
+            secondaryColor="rgba(0, 0, 0, 1)"
+          />
+        ) : (
+          "Выйти"
+        )}
       </Button>
     </Flex>
   );

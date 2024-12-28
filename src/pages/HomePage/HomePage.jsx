@@ -3,7 +3,7 @@ import { FeedPosts } from "@/components/FeedPosts/FeedPosts";
 import { SuggestedUsers } from "@/components/SuggestedUsers/SuggestedUsers";
 import { useAuthStore } from "@/store/authStore";
 
-export const HomePage = () => {
+export default function HomePage() {
   const authUser = useAuthStore((state) => state.user);
   return (
     <Container maxW="7xl">
@@ -19,4 +19,4 @@ export const HomePage = () => {
       </Flex>
     </Container>
   );
-};
+}

@@ -10,6 +10,7 @@ import { useAuthStore } from "@/store/authStore";
 import { usePreviewImg } from "@/hooks/usePreviewImg";
 import { useEditProfile } from "@/hooks/useEditProfile";
 import { useShowToast } from "@/hooks/useShowToast";
+import { SpinnerCircular } from "spinners-react";
 
 export const EditProfile = () => {
   const authUser = useAuthStore((state) => state.user);
@@ -122,10 +123,18 @@ export const EditProfile = () => {
               bg: "blue.500",
             }}
             onClick={handleEditProfile}
-            loading={isUpdating}
             disabled={!inputs.userName}
           >
-            Сохранить
+            {isUpdating ? (
+              <SpinnerCircular
+                thickness={100}
+                speed={100}
+                color="rgba(57, 172, 140, 1)"
+                secondaryColor="rgba(0, 0, 0, 1)"
+              />
+            ) : (
+              "Сохранить"
+            )}
           </Button>
         </Stack>
       </Stack>

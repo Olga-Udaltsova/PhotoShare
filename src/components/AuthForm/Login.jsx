@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useLogin } from "@/hooks/useLogin";
 import { useNavigate } from "react-router-dom";
+import { SpinnerCircular } from "spinners-react";
 
 export const Login = () => {
   const [inputs, setInputs] = useState({
@@ -31,15 +32,17 @@ export const Login = () => {
         onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
       />
 
-      <Button
-        w="full"
-        colorScheme="blue"
-        size="sm"
-        fontSize={14}
-        loading={loading}
-        onClick={() => login(inputs)}
-      >
-        Войти
+      <Button w="full" colorScheme="blue" size="sm" fontSize={14} onClick={() => login(inputs)}>
+        {loading ? (
+          <SpinnerCircular
+            thickness={100}
+            speed={100}
+            color="rgba(57, 172, 140, 1)"
+            secondaryColor="rgba(0, 0, 0, 1)"
+          />
+        ) : (
+          "Войти"
+        )}
       </Button>
     </>
   );
