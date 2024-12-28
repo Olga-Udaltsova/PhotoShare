@@ -7,7 +7,7 @@ export const CreatePost = () => (
   <Tooltip showArrow content="Создать пост" positioning={{ placement: "right" }} openDelay={500}>
     <Link
       display="flex"
-      to={"/"}
+      to={"/create"}
       as={RouterLink}
       alignItems="center"
       gap={4}

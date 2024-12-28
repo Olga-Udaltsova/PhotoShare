@@ -8,6 +8,7 @@ const AuthPage = lazy(() => import("@/pages/AuthPage/AuthPage"));
 const HomePage = lazy(() => import("@/pages/HomePage/HomePage"));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage/ProfilePage"));
 const SearchPage = lazy(() => import("@/pages/SearchPage/SearchPage"));
+const CreatePage = lazy(() => import("@/pages/CreatePage/CreatePage"));
 import { SpinnerCircular } from "spinners-react";
 import { Center } from "@chakra-ui/react";
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <SearchPage />,
+      },
+      {
+        path: "create",
+        element: <CreatePage />,
       },
     ],
   },
