@@ -1,9 +1,8 @@
 import { Provider } from "@/components/ui/provider";
-import { StrictMode, Suspense } from "react";
+import { StrictMode, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const AuthPage = lazy(() => import("@/pages/AuthPage/AuthPage"));
 const HomePage = lazy(() => import("@/pages/HomePage/HomePage"));
