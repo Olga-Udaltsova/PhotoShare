@@ -1,4 +1,4 @@
-import { Flex, GridItem, Image, Text, VStack, Box, StepsTitle } from "@chakra-ui/react";
+import { Flex, GridItem, Image, Text, VStack, Box } from "@chakra-ui/react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import {
