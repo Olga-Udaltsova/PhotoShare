@@ -1,4 +1,4 @@
-import { Flex, GridItem, Image, Text, VStack, Box } from "@chakra-ui/react";
+import { Flex, GridItem, Image, Text, VStack, Box, StepsTitle } from "@chakra-ui/react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import {
@@ -15,11 +15,42 @@ import { PostFooter } from "@/components/FeedPosts/FeedPost/PostFooter";
 import { useUserProfileStore } from "@/store/userProfileStore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/firebase";
+import { useShowToast } from "@/hooks/useShowToast";
+import { useState } from "react";
+import { deleteObject, ref } from "firebase/storage";
+import { storage, firestore } from "@/firebase/firebase";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { usePostStore } from "@/store/postStore";
+import { SpinnerCircular } from "spinners-react";
 
 export const ProfilePost = ({ post }) => {
   const [authUser] = useAuthState(auth);
   const { imageURL, likes, comments } = post;
+  const showToast = useShowToast();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const deletePost = usePostStore((state) => state.deletePost);
+  const decrementPostsCount = useUserProfileStore((state) => state.deletePost);
+
   const userProfile = useUserProfileStore((state) => state.userProfile);
+  const handleDeletePost = async () => {
+    if (!window.confirm("Вы уверены, что хотите удалить этот пост?")) return;
+    if (isDeleting) return;
+    try {
+      const imageRef = ref(storage, `posts/${post.id}`);
+      await deleteObject(imageRef);
+      const userRef = doc(firestore, "users", authUser.uid);
+      await deleteDoc(doc(firestore, "posts", post.id));
+      await updateDoc(userRef, { posts: arrayRemove(post.id) });
+
+      deletePost(post.id);
+      decrementPostsCount(post.id);
+      showToast("Успешно", "Пост был удален", "success");
+    } catch (error) {
+      showToast("Ошибка", error.message, "error");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
   return (
     <DialogRoot placement={"center"} size={{ base: "sm", md: "xl" }}>
       <DialogTrigger asChild>
@@ -97,8 +128,22 @@ export const ProfilePost = ({ post }) => {
                 </Flex>
 
                 {authUser?.uid === userProfile.uid && (
-                  <Box _hover={{ bg: "whiteAlpha.300", color: "red.600" }} borderRadius={4} p={1}>
-                    <MdDelete size={20} cursor={"pointer"} />
+                  <Box
+                    _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
+                    borderRadius={4}
+                    p={1}
+                    onClick={handleDeletePost}
+                  >
+                    {isDeleting ? (
+                      <SpinnerCircular
+                        thickness={100}
+                        speed={100}
+                        color="rgba(57, 172, 140, 1)"
+                        secondaryColor="rgba(0, 0, 0, 1)"
+                      />
+                    ) : (
+                      <MdDelete size={20} cursor={"pointer"} />
+                    )}
                   </Box>
                 )}
               </Flex>
