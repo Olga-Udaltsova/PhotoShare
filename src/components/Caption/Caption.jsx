@@ -1,23 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
-import { useGetUser } from "@/hooks/useGetUser";
-import { SpinnerCircular } from "spinners-react";
+import { useUserProfileStore } from "@/store/userProfileStore";
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/utils/timeAgo";
 
-export const Comment = ({ comment }) => {
-  const { comment: commentUser, createdAt } = comment;
-  const { isLoading, userProfile } = useGetUser(createdAt);
+export const Caption = ({ post }) => {
+  const { comment, createdAt } = post;
+  const userProfile = useUserProfileStore((state) => state.userProfile);
 
-  if (isLoading)
-    return (
-      <SpinnerCircular
-        thickness={100}
-        speed={100}
-        color="rgba(57, 172, 140, 1)"
-        secondaryColor="rgba(0, 0, 0, 1)"
-      />
-    );
   return (
     <Flex gap={4}>
       <Link to={`/${userProfile.userName}`}>
@@ -31,7 +21,7 @@ export const Comment = ({ comment }) => {
               {userProfile.userName}
             </Text>
           </Link>
-          <Text fontSize={14}>{commentUser}</Text>
+          <Text fontSize={14}>{comment}</Text>
         </Flex>
         <Text fontSize={12} color={"gray"}>
           {timeAgo(createdAt)}
