@@ -22,6 +22,7 @@ import { storage, firestore } from "@/firebase/firebase";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { usePostStore } from "@/store/postStore";
 import { SpinnerCircular } from "spinners-react";
+import { Caption } from "@/components/Caption/Caption";
 
 export const ProfilePost = ({ post }) => {
   const [authUser] = useAuthState(auth);
@@ -149,10 +150,13 @@ export const ProfilePost = ({ post }) => {
               </Flex>
 
               <VStack w="full" alignItems={"start"} maxH={"350px"} overflowY={"auto"} mt={3} mb={3}>
-                <Comment />
+                {post.caption && <Caption post={post} />}
+                {comments.map((comment) => {
+                  <Comment key={comment.id} comment={comment} />;
+                })}
               </VStack>
 
-              <PostFooter isProfilePage={true} />
+              <PostFooter post={post} isProfilePage={true} />
             </Flex>
           </Flex>
         </DialogBody>
