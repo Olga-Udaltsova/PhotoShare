@@ -8,25 +8,16 @@ import { getString } from "@/helpers/getString";
 import { usePostComment } from "@/hooks/usePostComment";
 import { useAuthStore } from "@/store/authStore";
 import { SpinnerCircular } from "spinners-react";
+import { useLikePost } from "@/hooks/useLikePost";
+import { timeAgo } from "@/utils/timeAgo";
 
-export const PostFooter = ({ post, userName, isProfilePage }) => {
+export const PostFooter = ({ post, creatorProfile, isProfilePage }) => {
   const authUser = useAuthStore((state) => state.user);
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(100);
-  const numberOfLike = useMemo(() => getString(likes), [likes]);
   const { isCommenting, handlePostComment } = usePostComment();
   const [comment, setComment] = useState("");
   const commentRef = useRef(null);
-
-  const handleLike = () => {
-    if (liked) {
-      setLiked(false);
-      setLikes(likes - 1);
-      return;
-    }
-    setLiked(true);
-    setLikes(likes + 1);
-  };
+  const { isLiked, likes, handleLikePost } = useLikePost(post);
+  const numberOfLike = useMemo(() => getString(likes), [likes]);
 
   const handleSubmitComment = async () => {
     await handlePostComment(post.id, comment);
@@ -36,8 +27,8 @@ export const PostFooter = ({ post, userName, isProfilePage }) => {
   return (
     <Box mb={10} mt={"auto"}>
       <Flex alignItems={"center"} gap={4} w={"full"} pt={0} mb={2} mt={4}>
-        <Box onClick={handleLike} cursor={"pointer"} fontSize={18}>
-          {!liked ? <PiHeart size={25} /> : <FcLike size={25} />}
+        <Box onClick={handleLikePost} cursor={"pointer"} fontSize={18}>
+          {!isLiked ? <PiHeart size={25} /> : <FcLike size={25} />}
         </Box>
         <Box cursor={"pointer"} fontSize={18} onClick={() => commentRef.current.focus()}>
           <FaRegComment size={22} />
@@ -47,16 +38,22 @@ export const PostFooter = ({ post, userName, isProfilePage }) => {
         {numberOfLike}
       </Text>
 
+      {isProfilePage && (
+        <Text fontSize="12" color={"gray"}>
+          Опубликовано {timeAgo(post.createdAt)}
+        </Text>
+      )}
+
       {!isProfilePage && (
         <>
           <Text fontSize={"sm"} fontWeight={700}>
-            {userName}
+            {creatorProfile?.userName}
             <Text as="span" fontWeight={400} ml={2}>
-              Какой-то комментарий
+              {post?.caption}
             </Text>
           </Text>
-          <Text fontSize={"sm"} color="gray">
-            Посмотреть все комментарии
+          <Text fontSize={"sm"} color="gray" cursor={"pointer"}>
+            {post.comments.length !== 0 && "Посмотреть все комментарии"}
           </Text>
         </>
       )}
