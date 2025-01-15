@@ -1,35 +1,32 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Text } from "@chakra-ui/react";
 import { FeedPost } from "./FeedPost/FeedPost";
+import { useGetFeedPosts } from "@/hooks/useGetFeedPosts";
+import { SpinnerCircular } from "spinners-react";
 
 export const FeedPosts = () => {
-  const users = [
-    {
-      img: "/img1.jpg",
-      userName: "Пользователь 1",
-      avatar: "/img1.jpg",
-    },
-    {
-      img: "/img2.jpg",
-      userName: "Пользователь 2",
-      avatar: "/img2.jpg",
-    },
-    {
-      img: "/img3.jpg",
-      userName: "Пользователь 3",
-      avatar: "/img3.jpg",
-    },
-    {
-      img: "/img4.jpg",
-      userName: "Пользователь 4",
-      avatar: "/img4.jpg",
-    },
-  ];
+  const { isLoading, posts } = useGetFeedPosts();
+
+  if (isLoading)
+    <SpinnerCircular
+      thickness={100}
+      speed={100}
+      color="rgba(57, 172, 140, 1)"
+      secondaryColor="rgba(0, 0, 0, 1)"
+    />;
 
   return (
     <Container maxW={"md"} py={10} px={2}>
-      {users.map((user, index) => (
-        <FeedPost key={index} image={user.img} userName={user.userName} avatar={user.avatar} />
-      ))}
+      {posts.length > 0 && posts.map((post) => <FeedPost key={post.id} post={post} />)}
+      {posts.length === 0 && (
+        <>
+          <Text fontSize={"md"} color={"red.400"}>
+            Упс... Кажется, вы ни на кого не подписаны.
+          </Text>
+          <Text color={"red.400"}>
+            Чтобы видеть чужие посты - подпишитесь на других пользователей
+          </Text>
+        </>
+      )}
     </Container>
   );
 };
