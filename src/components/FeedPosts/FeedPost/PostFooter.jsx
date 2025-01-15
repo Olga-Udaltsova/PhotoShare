@@ -1,4 +1,5 @@
 import { Box, Flex, Text, Input, Button } from "@chakra-ui/react";
+import { DialogRoot, DialogTrigger } from "@/components/ui/dialog";
 import { InputGroup } from "@/components/ui/input-group";
 import { FcLike } from "react-icons/fc";
 import { PiHeart } from "react-icons/pi";
@@ -10,6 +11,7 @@ import { useAuthStore } from "@/store/authStore";
 import { SpinnerCircular } from "spinners-react";
 import { useLikePost } from "@/hooks/useLikePost";
 import { timeAgo } from "@/utils/timeAgo";
+import { CommentModal } from "@/components/Modals/CommentModal";
 
 export const PostFooter = ({ post, creatorProfile, isProfilePage }) => {
   const authUser = useAuthStore((state) => state.user);
@@ -52,9 +54,14 @@ export const PostFooter = ({ post, creatorProfile, isProfilePage }) => {
               {post?.caption}
             </Text>
           </Text>
-          <Text fontSize={"sm"} color="gray" cursor={"pointer"}>
-            {post.comments.length !== 0 && "Посмотреть все комментарии"}
-          </Text>
+          <DialogRoot>
+            <DialogTrigger asChild>
+              <Text fontSize={"sm"} color="gray" cursor={"pointer"}>
+                {post.comments.length !== 0 && "Посмотреть все комментарии"}
+              </Text>
+            </DialogTrigger>
+            <CommentModal post={post} />
+          </DialogRoot>
         </>
       )}
 
