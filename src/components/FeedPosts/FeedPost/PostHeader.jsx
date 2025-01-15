@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { SpinnerCircular } from "spinners-react";
 import { useFollowUser } from "@/hooks/useFollowUser";
+import { timeAgo } from "@/utils/timeAgo";
 
 export const PostHeader = ({ post, creatorProfile }) => {
   const { handleFollowUser, isFollowing } = useFollowUser(post.createdBy);
@@ -16,7 +17,7 @@ export const PostHeader = ({ post, creatorProfile }) => {
               <Avatar src={creatorProfile.profilePicURL} alt={userName} size="sm" />
               <Flex fontSize={12} fontWeight="bold" gap={2}>
                 {creatorProfile.userName}
-                <Box color={"gray.500"}>1 w</Box>
+                <Box color={"gray.500"}>{timeAgo(post.createdBy)}</Box>
               </Flex>
             </Link>
           </Flex>
